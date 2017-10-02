@@ -14,7 +14,7 @@ function out_format ($data = [], $msg = '', $mark = 'success')
     $data_new['original'] = $data;
 
     date_default_timezone_set('PRC');
-    $date = date("y-m-d h:i:s");
+    $date = date("y-m-d H:i:s");
 
     $data_new['original']['update_time'] = $date;
     $data_new['original']['msg'] = $msg;
