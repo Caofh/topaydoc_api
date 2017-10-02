@@ -1,5 +1,5 @@
 <?php
-class Self_article extends CI_Controller {
+class Self_library extends CI_Controller {
 
     function __construct()
     {
