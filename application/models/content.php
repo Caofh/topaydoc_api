@@ -6,13 +6,16 @@ class Content extends CI_Model{
         parent::__construct();
     }
 
-    public function get_last_ten_entries()
+    public function get_last_ten_entries($param = [])
     {
-//        $this->load->database();
-//        $this->db->query("SET NAMES GBK"); //防止中文乱码
-//        $query = $this->db->get('self_library');
 
-        $query = $this->db->query('select * from self_library');
+        $type = $param['type'];
+
+        if (isset($type)) {
+            $query = $this->db->query('select * from self_library where type='.$type);
+        } else {
+            $query = $this->db->query('select * from self_library');
+        }
 
         return $query->result();
     }

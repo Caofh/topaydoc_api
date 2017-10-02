@@ -7,7 +7,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * @param string $size [optional] 可选缩率图大小，默认原图
  * @return string 完整的缩率图路径
  */
-function out_format ($data = [], $msg = '', $mark = 'success')
+function out_format ($data = [], $msg = '请求成功', $mark = 'success')
 {
     $data_new = [];
 

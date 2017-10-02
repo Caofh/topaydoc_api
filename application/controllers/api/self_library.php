@@ -9,17 +9,22 @@ class Self_library extends CI_Controller {
 
     public function index(){
 
-//        var_dump(111);
-//        exit;
+        // 处理传参
+        $type = isset($_GET['type']) && $_GET['type'] !== '' ? $_GET['type'] : null;
 
-        $this->load->model('content');
-        $query = $this->content->get_last_ten_entries();
-
-        $data = [
-          'data' => $query
+        $param = [
+          'type' => $type
         ];
 
-        $out_data = out_format($data, '请求成功');
+        $this->load->model('content');
+        $query = $this->content->get_last_ten_entries($param);
+
+        $data = [
+          'data' => $query,
+          'total' => count($query)
+        ];
+
+        $out_data = out_format($data);
 
         renderJson($out_data);
 
