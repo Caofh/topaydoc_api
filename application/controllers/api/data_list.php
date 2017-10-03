@@ -116,7 +116,7 @@ class Data_list extends CI_Controller {
         $complete = filter('complete', 'post', 'int');
         $type = filter('type', 'post', 'int');
 
-        $mark = via_param([$id]);
+        $mark = via_param([$id, $complete, $type]);
 
         if ($mark) {
             $param = [
