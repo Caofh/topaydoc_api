@@ -1,5 +1,5 @@
 <?php
-class Self_library extends CI_Controller {
+class Data_list extends CI_Controller {
 
     function __construct()
     {
