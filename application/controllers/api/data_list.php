@@ -6,6 +6,8 @@ class Data_list extends CI_Controller {
         parent::__construct();
 
         $this->load->model('content');
+
+        date_default_timezone_set('PRC'); // 将区时设为北京时区
     }
 
 
@@ -68,8 +70,8 @@ class Data_list extends CI_Controller {
         $content_url = filter('content_url', 'post');
         $logo_uri = filter('logo_uri', 'post');
         $logo_url = filter('logo_url', 'post');
-        $create_time = filter('create_time', 'post');
-        $update_time = filter('update_time', 'post');
+        $create_time = date("y-m-d H:i:s");;
+        $update_time = date("y-m-d H:i:s");;
         $bg_color = filter('bg_color', 'post');
 
         $mark = via_param([$name, $complete, $type]);
@@ -110,11 +112,11 @@ class Data_list extends CI_Controller {
         $content_url = filter('content_url', 'post');
         $logo_uri = filter('logo_uri', 'post');
         $logo_url = filter('logo_url', 'post');
-        $create_time = filter('create_time', 'post');
-        $update_time = filter('update_time', 'post');
         $bg_color = filter('bg_color', 'post');
-        $complete = filter('complete', 'post', 'int');
-        $type = filter('type', 'post', 'int');
+        $complete = filter('complete', 'post', 'int'); // 必填
+        $type = filter('type', 'post', 'int'); // 必填
+        //        $create_time = filter('create_time', 'post');
+        $update_time = date("y-m-d H:i:s");
 
         $mark = via_param([$id, $complete, $type]);
 
@@ -126,7 +128,7 @@ class Data_list extends CI_Controller {
                 'content_url' => $content_url,
                 'logo_uri' => $logo_uri,
                 'logo_url' => $logo_url,
-                'create_time' => $create_time,
+//                'create_time' => $create_time,
                 'update_time' => $update_time,
                 'bg_color' => $bg_color,
                 'complete' => $complete,
@@ -137,7 +139,7 @@ class Data_list extends CI_Controller {
 
             $out_data = out_format(null, '更新成功');
         } else {
-            $out_data = out_format(null, '参数id有误', 'fail');
+            $out_data = out_format(null, '参数有误', 'fail');
         }
 
         renderJson($out_data);

@@ -67,7 +67,7 @@ class Content extends CI_Model{
         $content_url = isset($param['content_url']) ? toDatabaseStr($param['content_url']) : 'null';
         $logo_uri = isset($param['logo_uri']) ? toDatabaseStr($param['logo_uri']) : 'null';
         $logo_url = isset($param['logo_url']) ? toDatabaseStr($param['logo_url']) : 'null';
-        $create_time = isset($param['create_time']) ? toDatabaseStr($param['create_time']) : 'null';
+//        $create_time = isset($param['create_time']) ? toDatabaseStr($param['create_time']) : 'null';
         $update_time = isset($param['update_time']) ? toDatabaseStr($param['update_time']) : 'null';
         $bg_color = isset($param['bg_color']) ? toDatabaseStr($param['bg_color']) : 'null';
         $complete = isset($param['complete']) ? $param['complete'] : 'null';
@@ -76,7 +76,7 @@ class Content extends CI_Model{
         if (isset($id)) {
             $order = 'update self_library set 
             name='.$name.',content_uri='.$content_uri.',content_url='.$content_url.',logo_uri='.$logo_uri.'
-            ,logo_url='.$logo_url.',create_time='.$create_time.',update_time='.$update_time.',bg_color='.$bg_color.'
+            ,logo_url='.$logo_url.',update_time='.$update_time.',bg_color='.$bg_color.'
             ,complete='.$complete.',type='.$type.'
             where id='.$id.'';
 
