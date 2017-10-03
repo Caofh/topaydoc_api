@@ -22,3 +22,69 @@ function out_format ($data = [], $msg = '请求成功', $mark = 'success')
 
     return $data_new;
 }
+
+// 必填验证参数的存在
+function via_param ($param = [])
+{
+    $mark = true;
+
+    foreach ($param as $item) {
+        if (!(isset($item) && $item !== '')) {
+            $mark = false;
+        }
+    }
+
+    return $mark;
+
+}
+
+// 字符传前后加'\''，转为数据库查询形式
+function toDatabaseStr ($str = '')
+{
+    $str_new = '\''.$str.'\'';
+
+    return $str_new;
+
+}
+
+// 过滤传入get、post参数
+function filter($para, $type = 'get', $data_type = 'string')
+{
+    if ($type == 'get') {
+        if ($data_type == 'string') {
+            $paraResult = isset($_GET[$para]) && $_GET[$para] !== '' ? $_GET[$para] : null;
+        } elseif ($data_type == 'int') {
+            $paraResult = isset($_GET[$para]) && $_GET[$para] !== '' ? intval($_GET[$para]) : null;
+        } else {
+            $paraResult = isset($_GET[$para]) && $_GET[$para] !== '' ? $_GET[$para] : null;
+        }
+
+    } elseif ($type == 'post') {
+        if ($data_type == 'string') {
+            $paraResult = isset($_POST[$para]) && $_POST[$para] !== '' ? $_POST[$para] : null;
+        } elseif ($data_type == 'int') {
+            $paraResult = isset($_POST[$para]) && $_POST[$para] !== '' ? intval($_POST[$para]) : null;
+        } else {
+            $paraResult = isset($_POST[$para]) && $_POST[$para] !== '' ? $_POST[$para] : null;
+        }
+
+    } else {
+        die('本方法只支持get或post传值');
+    }
+
+    return $paraResult;
+}
+
+// 过滤页面中展示字段数据
+function filterPage($para)
+{
+
+    if (isset($para)) {
+        $paraResult = isset($para) && $para !== ''
+            ? str_replace(['<', '>'], ['&#60;', '&#62;'], $para)
+            : '';
+        return $paraResult;
+    } else {
+        return '';
+    }
+}
