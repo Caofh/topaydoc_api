@@ -15,9 +15,11 @@ class Data_list extends CI_Controller {
     public function index(){
 
         // 处理传参
+        $id = isset($_GET['id']) && $_GET['id'] !== '' ? $_GET['id'] : null; // 选填
         $type = isset($_GET['type']) && $_GET['type'] !== '' ? $_GET['type'] : null; // 选填
 
         $param = [
+            'id' => $id,
             'type' => $type
         ];
 

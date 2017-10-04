@@ -12,13 +12,23 @@ class Content extends CI_Model{
     public function get_list($param = [])
     {
 
+        $id = $param['id'];
         $type = $param['type'];
 
-        if (isset($type)) {
-            $query = $this->db->query('select * from self_library where type='.$type.'');
-        } else {
-            $query = $this->db->query('select * from self_library');
+        $condition = '';
+        if (isset($id) && $id !== '') {
+            $condition = ' where id='.$id.'';
+            if (isset($type) && $type !== '') {
+                $condition = ' where id='.$id.' and type='.$type.'';
+            }
+        } elseif (isset($type) && $type !== '') {
+            $condition = ' where type='.$type.'';
+            if (isset($id) && $id !== '') {
+                $condition = ' where type='.$type.' and id='.$id.'';
+            }
         }
+
+        $query = $this->db->query('select * from self_library'.$condition);
 
         return $query->result();
     }
