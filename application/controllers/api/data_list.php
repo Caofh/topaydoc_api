@@ -65,16 +65,19 @@ class Data_list extends CI_Controller {
     public function add_data ()
     {
 
-        $name = filter('name', 'post'); // 必填
-        $complete = filter('complete', 'post', 'int'); // 必填
-        $type = filter('type', 'post', 'int'); // 必填
-        $content_uri = filter('content_uri', 'post');
-        $content_url = filter('content_url', 'post');
-        $logo_uri = filter('logo_uri', 'post');
-        $logo_url = filter('logo_url', 'post');
-        $create_time = date("y-m-d H:i:s");;
-        $update_time = date("y-m-d H:i:s");;
-        $bg_color = filter('bg_color', 'post');
+        // 取得传入数据
+        $data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? json_decode($GLOBALS['HTTP_RAW_POST_DATA'], true) : [];
+
+        $name = isset($data['name']) && $data['name'] !== '' ? $data['name'] : null; // 必填
+        $complete = isset($data['complete']) && $data['complete'] !== '' ? intval($data['complete']) : null; // 必填
+        $type = isset($data['type']) && $data['type'] !== '' ? intval($data['type']) : null; // 必填
+        $content_uri = isset($data['content_uri']) && $data['content_uri'] !== '' ? $data['content_uri'] : null;
+        $content_url = isset($data['content_url']) && $data['content_url'] !== '' ? $data['content_url'] : null;
+        $logo_uri = isset($data['logo_uri']) && $data['logo_uri'] !== '' ? $data['logo_uri'] : null;
+        $logo_url = isset($data['logo_url']) && $data['logo_url'] !== '' ? $data['logo_url'] : null;
+        $create_time = date("y-m-d H:i:s");
+        $update_time = date("y-m-d H:i:s");
+        $bg_color = isset($data['bg_color']) && $data['bg_color'] !== '' ? $data['bg_color'] : null;
 
         $mark = via_param([$name, $complete, $type]);
 
@@ -107,18 +110,20 @@ class Data_list extends CI_Controller {
     // 更新文章信息
     public function update_data ()
     {
+        // 取得传入数据
+        $data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? json_decode($GLOBALS['HTTP_RAW_POST_DATA'], true) : [];
 
-        $id = filter('id', 'post', 'int'); // 必填
-        $name = filter('name', 'post');
-        $content_uri = filter('content_uri', 'post');
-        $content_url = filter('content_url', 'post');
-        $logo_uri = filter('logo_uri', 'post');
-        $logo_url = filter('logo_url', 'post');
-        $bg_color = filter('bg_color', 'post');
-        $complete = filter('complete', 'post', 'int'); // 必填
-        $type = filter('type', 'post', 'int'); // 必填
-        //        $create_time = filter('create_time', 'post');
+        $id = isset($data['id']) && $data['id'] !== '' ? intval($data['id']) : null; // 必填
+        $name = isset($data['name']) && $data['name'] !== '' ? $data['name'] : null; // 必填
+        $complete = isset($data['complete']) && $data['complete'] !== '' ? intval($data['complete']) : null; // 必填
+        $type = isset($data['type']) && $data['type'] !== '' ? intval($data['type']) : null; // 必填
+        $content_uri = isset($data['content_uri']) && $data['content_uri'] !== '' ? $data['content_uri'] : null;
+        $content_url = isset($data['content_url']) && $data['content_url'] !== '' ? $data['content_url'] : null;
+        $logo_uri = isset($data['logo_uri']) && $data['logo_uri'] !== '' ? $data['logo_uri'] : null;
+        $logo_url = isset($data['logo_url']) && $data['logo_url'] !== '' ? $data['logo_url'] : null;
+        $create_time = date("y-m-d H:i:s");
         $update_time = date("y-m-d H:i:s");
+        $bg_color = isset($data['bg_color']) && $data['bg_color'] !== '' ? $data['bg_color'] : null;
 
         $mark = via_param([$id, $complete, $type]);
 
