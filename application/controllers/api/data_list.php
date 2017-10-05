@@ -40,7 +40,10 @@ class Data_list extends CI_Controller {
     public function delete_data ()
     {
 
-        $id = isset($_POST['id']) && $_POST['id'] !== '' ? $_POST['id'] : null; // 必填
+        // 取得传入数据
+        $data = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? json_decode($GLOBALS['HTTP_RAW_POST_DATA'], true) : [];
+
+        $id = isset($data['id']) && $data['id'] !== '' ? $data['id'] : null; // 必填
 
         $mark = via_param([$id]);
 
