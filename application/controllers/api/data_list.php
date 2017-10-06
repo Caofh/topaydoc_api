@@ -17,10 +17,14 @@ class Data_list extends CI_Controller {
         // 处理传参
         $id = isset($_GET['id']) && $_GET['id'] !== '' ? $_GET['id'] : null; // 选填
         $type = isset($_GET['type']) && $_GET['type'] !== '' ? $_GET['type'] : null; // 选填
+        $start = isset($_GET['start']) && $_GET['start'] !== '' ? intval($_GET['start']) : 0; // 偏移起始
+        $count = isset($_GET['count']) && $_GET['count'] !== '' ? intval($_GET['count']) : 20; // 偏移数量
 
         $param = [
             'id' => $id,
-            'type' => $type
+            'type' => $type,
+            'start' => $start,
+            'count' => $count
         ];
 
         $query = $this->content->get_list($param);

@@ -14,23 +14,29 @@ class Content extends CI_Model{
 
         $id = $param['id'];
         $type = $param['type'];
+        $start = $param['start'];
+        $count = $param['count'];
 
-        $condition = '';
-        if (isset($id) && $id !== '') {
-            $condition = ' where id='.$id.'';
-            if (isset($type) && $type !== '') {
-                $condition = ' where id='.$id.' and type='.$type.'';
-            }
-        } elseif (isset($type) && $type !== '') {
-            $condition = ' where type='.$type.'';
+        if (isset($id) || isset($type)) {
             if (isset($id) && $id !== '') {
-                $condition = ' where type='.$type.' and id='.$id.'';
+                $where['id'] = $id;
             }
+            if (isset($type) && $type !== '') {
+                $where['type'] = $type;
+            }
+
+            $this->db->where($where);
         }
 
-        $query = $this->db->query('select * from self_library'.$condition);
+        $this->db->from('self_library');
+        if(intval($count) >= 0 ) {
+            $this->db->limit($count, $start);
+        }
+
+        $query = $this->db->get();
 
         return $query->result();
+
     }
 
     // 删除数据表数据
