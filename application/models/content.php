@@ -29,15 +29,15 @@ class Content extends CI_Model{
         }
 
         $this->db->from('self_library');
-        if(intval($count) >= 0 ) {
-            $this->db->limit($count, $start);
-        }
 
         $db = clone($this->db);
         $total_all = $this->db->count_all_results(); // self_library总数
 
         // 新查询总数后，用可从的db配置在查询真正的数据
         $this->db = $db;
+        if(intval($count) >= 0 ) {
+            $this->db->limit($count, $start);
+        }
         $query = $this->db->get();
 
         return [
