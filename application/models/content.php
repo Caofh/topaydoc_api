@@ -34,8 +34,12 @@ class Content extends CI_Model{
         }
 
         $query = $this->db->get();
+        $total_all = $this->db->count_all_results('self_library'); // self_library总数
 
-        return $query->result();
+        return [
+            'query' => $query->result(),
+            'total_all' => $total_all
+        ];
 
     }
 

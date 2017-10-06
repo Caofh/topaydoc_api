@@ -27,10 +27,13 @@ class Data_list extends CI_Controller {
             'count' => $count
         ];
 
-        $query = $this->content->get_list($param);
+        $query_arr = $this->content->get_list($param);
+        $query = $query_arr['query'];
+        $total_all = $query_arr['total_all'];
 
         $data = [
             'data' => $query,
+            'total_all' => $total_all,
             'total' => count($query)
         ];
 
