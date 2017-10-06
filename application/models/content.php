@@ -33,8 +33,12 @@ class Content extends CI_Model{
             $this->db->limit($count, $start);
         }
 
+        $db = clone($this->db);
+        $total_all = $this->db->count_all_results(); // self_library总数
+
+        // 新查询总数后，用可从的db配置在查询真正的数据
+        $this->db = $db;
         $query = $this->db->get();
-        $total_all = $this->db->count_all_results('self_library'); // self_library总数
 
         return [
             'query' => $query->result(),
